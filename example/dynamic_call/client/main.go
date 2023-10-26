@@ -13,7 +13,7 @@ func main() {
 	fmt.Println("start...")
 	defer fmt.Println("end...")
 
-	dynamic_call.SetProtoSetFiles("helloworld.protoset")
+	dynamic_call.SetProtoSetFiles("dynamic_call.protoset")
 	err := dynamic_call.InitDescSource()
 
 	if err != nil {
@@ -29,7 +29,7 @@ func main() {
 	grpcEnter.Init()
 
 	sendBody = `{"name": "golang world"}`
-	res, err := grpcEnter.Call("127.0.0.1:50051", "helloworld.Greeter", "SayHello", sendBody)
+	res, err := grpcEnter.Call("127.0.0.1:50051", "apigrpc.Greeter", "SayHello", sendBody)
 	fmt.Printf("%+v \n", res)
 	fmt.Println("req/reply return err: ", err)
 
