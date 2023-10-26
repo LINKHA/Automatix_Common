@@ -1,0 +1,19 @@
+// apigrpc.proto
+
+syntax = "proto3";
+
+package apigrpc;
+
+option go_package = "github.com/LINKHA/automatix-common/example/apigrpc";
+
+service YourService {
+  rpc YourMethod (YourRequest) returns (YourResponse){}
+}
+
+message YourRequest {
+  string name = 1;
+}
+
+message YourResponse {
+  string message = 1;
+}

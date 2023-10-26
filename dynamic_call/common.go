@@ -1,4 +1,4 @@
-package grpcall
+package dynamic_call
 
 import (
 	"crypto/md5"
