@@ -25,12 +25,6 @@ type Person struct {
 	Email    string `db:"email"`
 }
 
-type Place struct {
-	Country string `db:"country"`
-	City    string `db:"city"`
-	TelCode int    `db:"telcode"`
-}
-
 /*
 CREATE TABLE IF NOT EXISTS account_config (
 
@@ -46,7 +40,7 @@ type AccountConfig struct {
 
 var Db *sqlx.DB
 
-func init() {
+func Init(mongoUrl string, setModelMap map[string]IBaseModel) {
 	//sqlx.Open(数据库类型, "账号:密码@tcp(服务器IP:端口)/数据库")
 	database, err := sqlx.Open("mysql", "root:root@tcp(127.0.0.1:3307)/orm_test")
 	if err != nil {
@@ -55,15 +49,28 @@ func init() {
 	}
 	Db = database
 	//defer Db.Close() // 注意这行代码要写在上面err判断的下面
+
+	for k, v := range setModelMap {
+	}
 }
 
-func main() {
-	// findDemo()
-	selectDemo()
-	// insertDemo()
-	// updateDemo()
-	// deleteDemo()
+func Stop() {
+	defer func() {
+		Db.Close()
+	}()
 }
+
+func Get(model_name string) {
+	return ModelMap[model_name]
+}
+
+// func main() {
+// 	// findDemo()
+// 	selectDemo()
+// 	// insertDemo()
+// 	// updateDemo()
+// 	// deleteDemo()
+// }
 
 /**
  * [findDemo 查询单条]
